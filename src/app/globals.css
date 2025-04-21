@@ -54,3 +54,93 @@ body {
   text-align: center;
   z-index: 1; /* 确保文本在视频上方 */
 }
+
+/* styles/globals.css */
+
+/* styles/globals.css */
+
+/* 透明框样式 */
+.transparent-box {
+  display: flex;
+  flex-direction: column;   /* 让文字和图片垂直排列 */
+  align-items: center;      /* 水平居中 */
+  justify-content: center;  /* 垂直居中 */
+  width: 50%;
+  height: 250px;            /* 设置透明框的高度 */
+  background-color: rgba(255, 255, 255, 0.2); /* 半透明背景 */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* 白色透明边框 */
+  border-radius: 12px;      /* 圆角 */
+  position: fixed;
+  bottom: 20px;             /* 框在页面底部，距离底部 20px */
+  left: 50%;
+  transform: translateX(-50%); /* 水平居中 */
+  padding: 10px;
+  text-align: center;
+}
+
+/* 图片容器样式 */
+.image-container {
+  display: flex;            /* 使用 Flexbox 排列图片 */
+  justify-content: center;  /* 图片水平居中 */
+  gap: 50px;                /* 图片之间的间隔 */
+  bottom: 22px;
+}
+
+/* 图片样式 */
+.image-icon {
+  width: 150px;             /* 设置图片宽度为 190px */
+  height: 150px;            /* 设置图片高度为 190px */
+  object-fit: cover;        /* 确保图片不变形，保持比例 */
+  transition: transform 0.5s ease; /* 添加平滑过渡效果 */
+}
+
+/* 鼠标悬停时，图片旋转 */
+.image-icon:hover {
+  animation: swing 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) infinite; /* 旋转动画，使用 cubic-bezier 曲线 */
+}
+
+/* 定义旋转的动画 */
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);   /* 初始位置 */
+  }
+  25% {
+    transform: rotate(5deg);  /* 顺时针旋转 15° */
+  }
+  50% {
+    transform: rotate(-5deg); /* 逆时针旋转 15° */
+  }
+  75% {
+    transform: rotate(5deg);  /* 顺时针旋转 15° */
+  }
+  100% {
+    transform: rotate(-5deg); /* 逆时针旋转 15° */
+  }
+}
+
+/* 文字样式 */
+.homepage-text {
+  font-family: 'Lavishly Yours', cursive; /* 使用 Lavishly Yours 字体 */
+  font-size: 1.5rem;                      /* 设置字体大小 */
+  color: white;                           /* 设置字体颜色为白色 */
+  margin-bottom: 20px;                    /* 给文字和图片之间添加间距 */
+}
+
+/* 音乐控制按钮样式 */
+.music-control-button {
+  position: fixed;          /* 固定定位 */
+  top: 20px;                /* 距离页面顶部 20px */
+  right: 20px;              /* 距离页面右侧 20px */
+  background-color: rgba(0, 0, 0, 0.5); /* 按钮背景色 */
+  color: white;             /* 按钮文字颜色 */
+  border: none;             /* 去除按钮边框 */
+  padding: 10px 20px;       /* 设置按钮的内边距 */
+  font-size: 16px;          /* 设置按钮字体大小 */
+  border-radius: 50%;       /* 设置按钮圆形 */
+  cursor: pointer;         /* 鼠标悬停时显示为指针 */
+  z-index: 100;             /* 确保按钮在其他元素之上 */
+}
+
+.music-control-button:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* 鼠标悬停时的背景色 */
+}

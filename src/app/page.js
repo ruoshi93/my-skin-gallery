@@ -3,7 +3,7 @@
 
   // src/app/page.js
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const videoRef = useRef(null);
@@ -14,6 +14,19 @@ export default function Home() {
     videoRef.current.play();
     audioRef.current.play();
   }, []);
+
+  // 控制音乐播放和暂停的状态
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // 播放/暂停音频的函数
+  const toggleAudio = () => {
+    if (isPlaying) {
+      audioRef.current.pause();  // 如果正在播放则暂停
+    } else {
+      audioRef.current.play();   // 如果暂停则播放
+    }
+    setIsPlaying(!isPlaying);    // 切换状态
+  };
 
   return (
     <div className="home-page">
@@ -32,10 +45,37 @@ export default function Home() {
         loop
         autoPlay
       />
-      <div className="content">
-        <h1>Welcome to My Skin Gallery!</h1>
-        <p>This is the homepage of the gallery with background video and music.</p>
+      <div className="video-container">
+        <div className="transparent-box">
+          <h1 className="homepage-text">
+            Welcome to Magic Wardrobe<br />
+            <span>Please choose your guide</span>
+          </h1>
+  
+          <div className="image-container">
+            <img
+              src="/images/伞宝出场button.png" // 替换为你的图片路径
+              alt="Icon 1"
+              className="image-icon"
+            />
+            <img
+              src="/images/糖宝出场button.png" // 替换为你的图片路径
+              alt="Icon 2"
+              className="image-icon"
+            />
+          </div>
+        </div>
+        {/* 控制按钮 */}
+      <button className="music-control-button" onClick={toggleAudio}>
+        {isPlaying ? "暂停" : "播放"}
+      </button>
+
+      {/* 音频元素 */}
+      <audio ref={audioRef} loop>
+        <source src="/path-to-your-audio.mp3" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
       </div>
-    </div>
-  );
+      </div>
+    );
 }
