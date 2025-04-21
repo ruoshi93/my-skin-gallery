@@ -54,12 +54,12 @@ export default function Home() {
   
           <div className="image-container">
             <img
-              src="/images/伞宝出场button.png" // 替换为你的图片路径
+              src="/images/sanbao_icon.png" // 替换为你的图片路径
               alt="Icon 1"
               className="image-icon"
             />
             <img
-              src="/images/糖宝出场button.png" // 替换为你的图片路径
+              src="/images/tangbao_icon.png" // 替换为你的图片路径
               alt="Icon 2"
               className="image-icon"
             />
