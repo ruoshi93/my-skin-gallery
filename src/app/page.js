@@ -5,7 +5,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import TransitionOverlay from "@/components/TransitionOverlay";
+
+import { useRouter } from "next/navigation";
+
 export default function Home() {
+
   const videoRef = useRef(null);
   const audioRef = useRef(null);
 
@@ -13,6 +18,11 @@ export default function Home() {
     // 确保视频和音频开始时播放
     videoRef.current.play();
     audioRef.current.play();
+  }, []);
+
+  const router = useRouter();
+  useEffect(() => {
+    router.prefetch("/sugar"); // ⏳ 提前偷偷加载 "/sugar" 页面的代码，使过程更流畅
   }, []);
 
   // 控制音乐播放和暂停的状态
@@ -28,6 +38,13 @@ export default function Home() {
     setIsPlaying(!isPlaying);    // 切换状态
   };
 
+  // 转场
+  const [startTransition, setStartTransition] = useState(false);
+
+  const handleCharacterClick = () => {
+    setStartTransition(true);
+  };
+  
   return (
     <div className="home-page">
       <video
@@ -45,6 +62,7 @@ export default function Home() {
         loop
         autoPlay
       />
+  
       <div className="video-container">
         <div className="transparent-box">
           <h1 className="homepage-text">
@@ -54,28 +72,35 @@ export default function Home() {
   
           <div className="image-container">
             <img
-              src="/images/sanbao_icon.png" // 替换为你的图片路径
+              src="/images/sanbao_icon.png"
               alt="Icon 1"
               className="image-icon"
+              onClick={handleCharacterClick}
             />
             <img
-              src="/images/tangbao_icon.png" // 替换为你的图片路径
+              src="/images/tangbao_icon.png"
               alt="Icon 2"
               className="image-icon"
+              onClick={handleCharacterClick}
             />
           </div>
         </div>
+  
         {/* 控制按钮 */}
-      <button className="music-control-button" onClick={toggleAudio}>
-        {isPlaying ? "暂停" : "播放"}
-      </button>
-
-      {/* 音频元素 */}
-      <audio ref={audioRef} loop>
-        <source src="/path-to-your-audio.mp3" type="audio/mp3" />
-        Your browser does not support the audio element.
-      </audio>
+        <button className="music-control-button" onClick={toggleAudio}>
+          {isPlaying ? "暂停" : "播放"}
+        </button>
+  
+        {/* 音频元素（你前面已经有一个 audio 元素了，这个可以删掉） */}
       </div>
-      </div>
-    );
+  
+      {/* ✨✨✨ 转场就放在这里！在最外层 div 内部！ */}
+      <TransitionOverlay
+        trigger={startTransition}
+        onComplete={() => {
+          router.push("/sugar"); 
+        }}
+      />
+    </div>
+  );
 }
